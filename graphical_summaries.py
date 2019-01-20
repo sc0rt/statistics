@@ -44,7 +44,7 @@ p = norm.pdf(x, mu, sigma)
 # Plot histogram with PDF
 plt.plot(x, p, 'k')
 plt.xlabel('Grade')
-plt.ylabel('Relative Frequency')
+plt.ylabel('Probability Density')
 title = "Historgram of Student Grades\nPDF fit results: mu = %.2f,  sigma = %.2f" % (mu, sigma)
 plt.title(title)
 plt.grid(True)
