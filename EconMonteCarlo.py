@@ -47,7 +47,7 @@ xmin, xmax = plt.xlim() # set the xmin and xmax along the axes for the pdf
 x = np.linspace(xmin, xmax)
 p = norm.pdf(x, sim_mu, sim_sig)
 
-# Plots of raw data; logarithm of the returns; Monte Carlo Simulations; 
+# Plots of raw data; logarithmic return; Monte Carlo Simulations; 
 # and frequencies of the Monte Carle simulations fit to normal distribution
 plt.plot(x, p, 'k')
 data.plot(figsize=(12, 8))
