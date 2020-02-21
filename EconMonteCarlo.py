@@ -8,7 +8,7 @@ from scipy.stats import norm
 start = dt.datetime(2018,1,1)
 end = dt.datetime.now()
 ticker = 'INTC'
-time_steps = 30 # the amount of steps taken into the future for the simulation
+time_steps = 25 # the amount of steps taken into the future for the simulation
 sims = 100 # the number of simulations that will be run
 
 # Setting up data in a DataFrame
@@ -36,12 +36,12 @@ monte_list[0] = initial
 for t in range(1, time_steps):
     monte_list[t] = monte_list[t - 1] * daily_returns[t]
 
-# Histogram for the price frequencies
+# Histogram for the price frequencies, number of bins can be adjusted
 plt.figure(figsize=(10, 6))
-plt.hist(monte_list[1], bins=5, density=True)
+plt.hist(monte_list[1], bins=10, density=True)
 
 # Fit a normal distribution to the first simulation point in monte_list data
-# Could implement for each successive iteration in the monte_list index (monte_list[2], monte_list[3] etc.)
+# Could implement for each successive iteration in the monte_list index (monte_list[2], monte_list[3], ..., monte_list[time_steps - 1])
 sim_mu, sim_sig = norm.fit(monte_list[1])
 
 # Probability Density Function
