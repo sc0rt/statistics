@@ -7,14 +7,16 @@ from scipy.stats import norm
 
 start = dt.datetime(2018,1,1)
 end = dt.datetime.now()
-ticker = 'INTC' # using Intel stock closing prices as an example
+ticker = 'INTC' # symbol for Intel Corp
 time_steps = 25 # the amount of steps taken into the future for the simulation
 sims = 100 # the number of simulations that will be run
 
 # Setting up data in a DataFrame
+# Using adjusted closing prices of Intel stock as an example
 data = pd.DataFrame()
 data[ticker] = pdr.DataReader(ticker, data_source='yahoo', start=start, end=end)['Adj Close']
 
+# Logarithmic returns
 # pct_change is the percentage change between current and prior element
 log_returns = np.log(1 + data.pct_change())
 
