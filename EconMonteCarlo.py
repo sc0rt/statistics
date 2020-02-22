@@ -11,7 +11,7 @@ from scipy.stats import norm
 start = dt.datetime(2018,1,1)
 end = dt.datetime.now()
 ticker = 'INTC' # symbol for Intel Corp
-time_steps = 25 # the amount of steps taken into the future for the simulation
+time_steps = 25 # (time_steps - 1) is the amount of steps taken into the future for the simulation
 sims = 100 # the number of simulations that will be run
 
 # Setting up data in a DataFrame
