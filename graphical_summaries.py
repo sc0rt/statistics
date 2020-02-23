@@ -31,14 +31,14 @@ for num in grade_data.split(' '):
     grades.append(int(num)) # data now a list of integer grade values
 
 # Histogram for grades
-plt.hist(grades, bins=5, density=True) #desired bin size for normal distribution
+plt.hist(grades, bins=5, density=True) #desired bin numbers for normal distribution
 
 # Fit a normal distribution to the grade data
 mu, sigma = norm.fit(grades)
 
 # Probability Density Function for grades
-xmin, xmax = plt.xlim() #set the xmin and xmax along the axes for the pdf
-x = np.linspace(xmin, xmax, 100)
+xmin, xmax = plt.xlim() #set the xmin and xmax along the x-axis for the pdf
+x = np.linspace(xmin-12, xmax+10, 100)
 p = norm.pdf(x, mu, sigma)
 
 # Plot histogram with PDF

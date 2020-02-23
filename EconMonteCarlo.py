@@ -50,7 +50,7 @@ plt.hist(monte_list[1], bins=10, density=True)
 sim_mu, sim_sig = norm.fit(monte_list[1])
 
 # Probability Density Function
-xmin, xmax = plt.xlim() # set the xmin and xmax along the axes for the pdf
+xmin, xmax = plt.xlim() # set the xmin and xmax along the x-axis for the pdf
 x = np.linspace(xmin, xmax)
 p = norm.pdf(x, sim_mu, sim_sig)
 
