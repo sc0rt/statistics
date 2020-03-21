@@ -47,7 +47,7 @@ xmin, xmax = plt.xlim() # set the xmin and xmax along the x-axis for the pdf
 x = np.linspace(xmin, xmax)
 p = norm.pdf(x, sim_mu, sim_sig)
 
-# Plot Histrogram with probability density function
+# Plot Histogram with probability density function
 plt.plot(x, p, 'k') # normal distribution fit
 plt.xlabel('Expenses to Sales Ratio')
 plt.ylabel('Bin Frequency')
