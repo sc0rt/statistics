@@ -5,7 +5,7 @@ import pandas_datareader as pdr
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
-time_steps = 5 # 5 Years into the future
+time_steps = 6 # 5 Years into the future
 sims = 20 # 20 simulations for each time step
 
 data = pd.DataFrame({'Fiscal Year' : [2014, 2015, 2016, 2017, 2018],
@@ -47,8 +47,18 @@ xmin, xmax = plt.xlim() # set the xmin and xmax along the x-axis for the pdf
 x = np.linspace(xmin, xmax)
 p = norm.pdf(x, sim_mu, sim_sig)
 
-# Plot for the first simulation fit to normal distribution, and plot for Monte Carlo Simulation
+# Plot Histrogram with probability density function
 plt.plot(x, p, 'k') # normal distribution fit
+plt.xlabel('Expenses to Sales Ratio')
+plt.ylabel('Bin Frequency')
+title = "Histogram for 20 Simulations of Expenses to Sales Ratio 1 Year into the Future\nPDF fit results: mu = %.4f,  sigma = %.4f" % (sim_mu, sim_sig)
+plt.title(title)
+
+# Plot of 25 Monte Carlo Simulations for each year into the future
 plt.figure(figsize=(10, 6))
 plt.plot(monte_list) # monte carlo
+plt.xlabel('Years into the Future')
+plt.ylabel('Expenses to Sales Ratio')
+title = "Expenses to Sales Ratio Monte Carlo Simulations (n = 20)"
+plt.title(title)
 plt.show()
