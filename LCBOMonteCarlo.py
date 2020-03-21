@@ -54,7 +54,7 @@ plt.ylabel('Bin Frequency')
 title = "Histogram for 20 Simulations of Expenses to Sales Ratio 1 Year into the Future\nPDF fit results: mu = %.4f,  sigma = %.4f" % (sim_mu, sim_sig)
 plt.title(title)
 
-# Plot of 25 Monte Carlo Simulations for each year into the future
+# Plot of 20 Monte Carlo Simulations for each year into the future
 plt.figure(figsize=(10, 6))
 plt.plot(monte_list) # monte carlo
 plt.xlabel('Years into the Future')
