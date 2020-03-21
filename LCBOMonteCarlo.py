@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 time_steps = 6 # 5 Years into the future
-sims = 20 # 20 simulations for each time step
+sims = 30 # 30 simulations for each time step
 
 data = pd.DataFrame({'Fiscal Year' : [2014, 2015, 2016, 2017, 2018],
                     'Expenses to Sales Ratio' : [0.163, 0.160, 0.156, 0.160, 0.158]})
@@ -36,7 +36,7 @@ for t in range(1, time_steps):
 
 # Histogram for the price frequencies, number of bins can be adjusted
 plt.figure(figsize=(10, 6))
-plt.hist(monte_list[1], bins=3, density=True)
+plt.hist(monte_list[1], bins=5, density=True)
 
 # Fit a normal distribution to the first simulation point in monte_list data
 # Could implement for each successive iteration in the monte_list index (monte_list[2], monte_list[3], ..., monte_list[time_steps - 1])
@@ -51,14 +51,14 @@ p = norm.pdf(x, sim_mu, sim_sig)
 plt.plot(x, p, 'k') # normal distribution fit
 plt.xlabel('Expenses to Sales Ratio')
 plt.ylabel('Bin Frequency')
-title = "Histogram for 20 Simulations of Expenses to Sales Ratio 1 Year into the Future\nPDF fit results: mu = %.4f,  sigma = %.4f" % (sim_mu, sim_sig)
+title = "Histogram for 30 Simulations of Expenses to Sales Ratio 1 Year into the Future\nPDF fit results: mu = %.4f,  sigma = %.4f" % (sim_mu, sim_sig)
 plt.title(title)
 
-# Plot of 20 Monte Carlo Simulations for each year into the future
+# Plot of 30 Monte Carlo Simulations for each year into the future
 plt.figure(figsize=(10, 6))
 plt.plot(monte_list) # monte carlo
 plt.xlabel('Years into the Future')
 plt.ylabel('Expenses to Sales Ratio')
-title = "Expenses to Sales Ratio Monte Carlo Simulations (n = 20)"
+title = "Expenses to Sales Ratio Monte Carlo Simulations (n = 30)"
 plt.title(title)
 plt.show()
