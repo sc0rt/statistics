@@ -50,7 +50,7 @@ p = norm.pdf(x, sim_mu, sim_sig)
 # Plot Histogram with probability density function
 plt.plot(x, p, 'k') # normal distribution fit
 plt.xlabel('Expenses to Sales Ratio')
-plt.ylabel('Bin Frequency')
+plt.ylabel('Probability Density')
 title = "Histogram for 30 Simulations of Expenses to Sales Ratio 1 Year into the Future\nPDF fit results: mu = %.4f,  sigma = %.4f" % (sim_mu, sim_sig)
 plt.title(title)
 
