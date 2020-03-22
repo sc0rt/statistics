@@ -1,38 +1,39 @@
-import datetime as dt
+# https://www.lcbo.com/content/dam/lcbo/corporate-pages/about/pdf/LCBO_AR17-18-english.pdf
+
 import numpy as np 
 import pandas as pd
-import pandas_datareader as pdr
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
 time_steps = 6 # 5 Years into the future
 sims = 30 # 30 simulations for each time step
 
-data = pd.DataFrame({'Fiscal Year' : [2014, 2015, 2016, 2017, 2018],
-                    'Expenses to Sales Ratio' : [0.163, 0.160, 0.156, 0.160, 0.158]})
+# Net income in billions of dollars
+data = pd.DataFrame({'Fiscal Year' : [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018],
+                    'Expenses to Sales Ratio' : [1.37, 1.41, 1.44, 1.56, 1.66, 1.71, 1.74, 1.82, 1.97, 2.07, 2.21]})
 data.set_index('Fiscal Year', inplace=True)
 
 # pct_change is the percentage change between current and prior element
-log_esr = np.log(1 + data.pct_change())
+log_ni = np.log(1 + data.pct_change())
 
-# Setting up the values necessary for the yearly_esr expression
-mu = log_esr.mean() # average/mean
-var = log_esr.var() # variance
+# Setting up the values necessary for the yearly_ni expression
+mu = log_ni.mean() # average/mean
+var = log_ni.var() # variance
 drift = mu - (0.5 * var) # drift
-sigma = log_esr.std() # standard deviation
+sigma = log_ni.std() # standard deviation
 
 # ers is expenses to sales ratio
-yearly_esr = np.exp(drift.values + sigma.values * norm.ppf(np.random.rand(time_steps, sims)))
+yearly_ni = np.exp(drift.values + sigma.values * norm.ppf(np.random.rand(time_steps, sims)))
 
 # Takes last data point as as the starting point for the simulations
 initial = data.iloc[-1]
-monte_list = np.zeros_like(yearly_esr)
+monte_list = np.zeros_like(yearly_ni)
 monte_list[0] = initial
 
 # For the amount of steps taken into the future, this loop calculated the simulation data to be plotted
-# Takes input price, multiplies it by the exponential value calculated in yearly_esr, sets simulated price
+# Takes input price, multiplies it by the exponential value calculated in yearly_ni, sets simulated price
 for t in range(1, time_steps):
-    monte_list[t] = monte_list[t - 1] * yearly_esr[t]
+    monte_list[t] = monte_list[t - 1] * yearly_ni[t]
 
 # Histogram for the price frequencies, number of bins can be adjusted
 plt.figure(figsize=(10, 6))
@@ -51,14 +52,14 @@ p = norm.pdf(x, sim_mu, sim_sig)
 plt.plot(x, p, 'k') # normal distribution fit
 plt.xlabel('Expenses to Sales Ratio')
 plt.ylabel('Probability Density')
-title = "Histogram for 30 Simulations of Expenses to Sales Ratio 1 Year into the Future\nPDF fit results: mu = %.4f,  sigma = %.4f" % (sim_mu, sim_sig)
+title = "Histogram for 30 Simulations for Net Income 1 Year into the Future\nPDF fit results: mu = %.4f,  sigma = %.4f" % (sim_mu, sim_sig)
 plt.title(title)
 
 # Plot of 30 Monte Carlo Simulations for each year into the future
 plt.figure(figsize=(10, 6))
 plt.plot(monte_list) # monte carlo
 plt.xlabel('Years into the Future')
-plt.ylabel('Expenses to Sales Ratio')
-title = "Expenses to Sales Ratio Monte Carlo Simulations (n = 30)"
+plt.ylabel('Net Income in Billions of Dollars')
+title = "Net Income Monte Carlo Simulations (n = 30)"
 plt.title(title)
 plt.show()
