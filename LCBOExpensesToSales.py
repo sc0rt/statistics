@@ -1,4 +1,4 @@
-# https://www.lcbo.com/content/dam/lcbo/corporate-pages/about/pdf/LCBO_AR17-18-english.pdf #
+# https://www.lcbo.com/content/dam/lcbo/corporate-pages/about/pdf/LCBO_AR17-18-english.pdf
 
 import numpy as np 
 import pandas as pd
@@ -21,7 +21,7 @@ var = log_esr.var() # variance
 drift = mu - (0.5 * var) # drift
 sigma = log_esr.std() # standard deviation
 
-# ers is expenses to sales ratio
+# esr is expenses to sales ratio
 yearly_esr = np.exp(drift.values + sigma.values * norm.ppf(np.random.rand(time_steps, sims)))
 
 # Takes last data point as as the starting point for the simulations
