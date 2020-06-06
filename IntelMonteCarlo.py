@@ -21,7 +21,7 @@ sims = 100 # the number of simulations that will be run
 data = pd.DataFrame()
 data[ticker] = pdr.DataReader(ticker, data_source='yahoo', start=start, end=end)['Adj Close']
 
-# Logarithmic returns
+# lognormal returns
 # pct_change is the percentage change between current and prior element
 log_returns = np.log(1 + data.pct_change())
 
@@ -56,11 +56,33 @@ xmin, xmax = plt.xlim() # set the xmin and xmax along the x-axis for the pdf
 x = np.linspace(xmin, xmax)
 p = norm.pdf(x, sim_mu, sim_sig)
 
-# Plots of raw data; logarithmic return; Monte Carlo Simulations; 
+# Plots of raw data; lognormal return; Monte Carlo Simulations; 
 # and frequencies of the Monte Carle simulations fit to normal distribution
 plt.plot(x, p, 'k') # normal distribution fit
-data.plot(figsize=(10, 6)) # raw data
-log_returns.plot(figsize=(10, 6)) # logarithmic returns
+plt.xlabel('Adjusted Closing Price')
+plt.ylabel('Probability Density')
+title = "Histogram for 100 Simulations of Adjusted Closing Price 1 Day into the Future\nPDF fit results: mu = %.4f,  sigma = %.4f" % (sim_mu, sim_sig)
+plt.title(title)
+
+#Adjusted Closing Price data acquired from Yahoo Finance
+data.plot(figsize=(10, 6))
+plt.xlabel('Date')
+plt.ylabel('Adjusted Closing Price')
+title = "Intel's Adjusted Closing Prices Over Time"
+plt.title(title)
+
+# lognormal returns plot
+log_returns.plot(figsize=(10, 6)) 
+plt.xlabel('Date')
+plt.ylabel('Lognormal Return')
+title = "Lognormal Returns Over Time"
+plt.title(title)
+
+# Monte Carlo Simulations for each day into the future
 plt.figure(figsize=(10, 6))
 plt.plot(monte_list) # monte carlo
+plt.xlabel('Days into the Future')
+plt.ylabel('Adjusted Closing Price')
+title = "Monte Carlo Simulations (n = 100) for Intel's Adjusted Closing Prices"
+plt.title(title)
 plt.show()
