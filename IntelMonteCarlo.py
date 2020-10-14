@@ -21,7 +21,7 @@ sims = 100 # the number of simulations that will be run
 data = pd.DataFrame()
 data[ticker] = pdr.DataReader(ticker, data_source='yahoo', start=start, end=end)['Adj Close']
 
-# lognormal returns
+# log returns
 # pct_change is the percentage change between current and prior element
 log_returns = np.log(1 + data.pct_change())
 
@@ -71,11 +71,11 @@ plt.ylabel('Adjusted Closing Price')
 title = "Intel's Adjusted Closing Prices Over Time"
 plt.title(title)
 
-# lognormal returns plot
+# log returns plot
 log_returns.plot(figsize=(10, 6)) 
 plt.xlabel('Date')
-plt.ylabel('Lognormal Return')
-title = "Lognormal Returns Over Time"
+plt.ylabel('Log Return')
+title = "Log Returns Over Time"
 plt.title(title)
 
 # Monte Carlo Simulations for each day into the future
