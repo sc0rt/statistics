@@ -56,7 +56,7 @@ xmin, xmax = plt.xlim() # set the xmin and xmax along the x-axis for the pdf
 x = np.linspace(xmin, xmax)
 p = norm.pdf(x, sim_mu, sim_sig)
 
-# Plots of raw data; lognormal return; Monte Carlo Simulations; 
+# Plots of raw data; log return; Monte Carlo Simulations; 
 # and frequencies of the Monte Carle simulations fit to normal distribution
 plt.plot(x, p, 'k') # normal distribution fit
 plt.xlabel('Adjusted Closing Price')
